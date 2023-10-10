@@ -1,8 +1,8 @@
 module MyStatsPackage
 
-    function printOwner()
-        println("alvorithm")
-    end
+function printOwner()
+    println("alvorithm")
+end
 
 
     include("statistics_functions.jl")
