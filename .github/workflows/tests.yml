@@ -28,7 +28,7 @@ jobs:
                 write(stdout, out)
                 exit(1)
             end' 
-  - tests
+  tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
