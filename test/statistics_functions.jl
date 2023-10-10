@@ -7,12 +7,12 @@
 
     @testset "rse_mean" begin
         @test rse_mean(-15:17) == 1
-        @test rse_mean([1,3,6]) ≈ 3.333 atol=1e-3
-      
+        @test rse_mean([1, 3, 6]) ≈ 3.333 atol = 1e-3
+
     end
 
     @testset "rse_std" begin
-        @test rse_std(-50:12) ≈ 18.3303 atol=1e-4
+        @test rse_std(-50:12) ≈ 18.3303 atol = 1e-4
     end
 
     @testset "rse_tstat" begin
@@ -25,9 +25,9 @@
 end
 
 @testset "efficient statistics" begin
-    
+
     data = [43, 32, 167, 18, 1, 209]
-    
+
     μ = rse_mean(data)
     σ = rse_std(data)
     ℓ = length(data)
@@ -37,8 +37,8 @@ end
 
     # Actual result
     # TODO: check the whole chain: mu cached, get 
-    actual_tstat_cached_all = rse_tstat(data; μ=μ, σ=σ, ℓ=ℓ)
-    
+    actual_tstat_cached_all = rse_tstat(data; μ = μ, σ = σ, ℓ = ℓ)
+
     # Test
-    @test actual_tstat_cached_all ≈ expected_tstat_cached_all atol=1e-7
+    @test actual_tstat_cached_all ≈ expected_tstat_cached_all atol = 1e-7
 end
