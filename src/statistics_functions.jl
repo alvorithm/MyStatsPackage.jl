@@ -11,28 +11,28 @@ end
 
 
 
-function rse_mean(v; ℓ=length(v))
+function rse_mean(v; ℓ = length(v))
     @assert all(!isnan, v)
     @assert ℓ > 0
-    return rse_sum(v)/ℓ
+    return rse_sum(v) / ℓ
 end
 
 
 
-function rse_std(v; μ=rse_mean(v), ℓ=length(v))
+function rse_std(v; μ = rse_mean(v), ℓ = length(v))
     @assert all(!isnan, v)
     @assert ℓ > 0
-    var = sum((v.-μ).^2) /(ℓ-1)
+    var = sum((v .- μ) .^ 2) / (ℓ - 1)
     return sqrt(var)
 end
 
 
 
-function rse_tstat(v; ℓ=length(v), μ=rse_mean(v), σ=rse_std(v))
+function rse_tstat(v; ℓ = length(v), μ = rse_mean(v), σ = rse_std(v))
     @assert ℓ > 0
     @assert σ > 0
 
-    μ/(σ/sqrt(ℓ))
+    μ / (σ / sqrt(ℓ))
 end
 
 
@@ -45,9 +45,9 @@ end
 
 function StatResult(x)
     ℓ = length(x)
-    μ = rse_mean(x;ℓ=ℓ)
-    σ = rse_std(x; ℓ=ℓ,μ=μ)
-    τ = rse_tstat(x;ℓ=ℓ,μ=μ,σ=σ )
+    μ = rse_mean(x; ℓ = ℓ)
+    σ = rse_std(x; ℓ = ℓ, μ = μ)
+    τ = rse_tstat(x; ℓ = ℓ, μ = μ, σ = σ)
     return StatResult(x, ℓ, σ, τ)
 end
 
