@@ -1,6 +1,7 @@
 using ProgressMeter
 
 function rse_sum(v)
+    @assert all(!isnan, v)
     res = 0
     @showprogress for el in v
         res = res + el
@@ -8,29 +9,31 @@ function rse_sum(v)
     return res
 end
 
-# rse_sum(1:36) == 666
 
 
 function rse_mean(v; ℓ=length(v))
+    @assert all(!isnan, v)
+    @assert ℓ > 0
     return rse_sum(v)/ℓ
 end
 
-# rse_mean(-15:17) == 1
 
 
 function rse_std(v; μ=rse_mean(v), ℓ=length(v))
+    @assert all(!isnan, v)
+    @assert ℓ > 0
     var = sum((v.-μ).^2) /(ℓ-1)
     return sqrt(var)
 end
 
-# rse_std(1:3) == 1.0
 
 
 function rse_tstat(v; ℓ=length(v), μ=rse_mean(v), σ=rse_std(v))
+    @assert ℓ > 0
+    @assert σ > 0
+
     μ/(σ/sqrt(ℓ))
 end
-
-# rse_tstat(2:3;σ = 4)
 
 
 struct StatResult
